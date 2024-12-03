@@ -88,7 +88,7 @@ jobs:
 
 By default, this will use the [automatic GitHub token](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) that's provided to the workflow. This means the approval will come from the "github-actions" bot user. Make sure you enable the `pull-requests: write` permission in your workflow.
 
-To approve the pull request as a different user, pass a GitHub Personal Access Token into the `github-token` input. In order to approve the pull request, the token needs the `repo` scope enabled.
+To approve the pull request as a different user, pass a GitHub Personal Access Token into the `github-token` input. Newer Fine-grained tokens and older "classic" tokens require different permissions (see below).
 
 ```yaml
 name: Auto approve
@@ -103,6 +103,18 @@ jobs:
         with:
           github-token: ${{ secrets.SOME_USERS_PAT }}
 ```
+
+#### Fine-grained Personal Access Token Permissions
+
+Enable the following Repository permissions:
+
+  * `Metadata` : `read-only`
+  * `Pull requests`: `read/write`
+
+#### "Classic" Personal Access Token Permissions
+
+Enable the `repo` Scope.
+
 
 ### Approving Dependabot pull requests
 
